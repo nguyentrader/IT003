@@ -157,6 +157,16 @@ treeNode* findParent(treeNode* root, int value) {
     }
 }
 
+// Fuction to find the height of the BST
+int findHeight(treeNode* root) {
+    if (root == nullptr) {
+        return -1; // Height of an empty tree is -1
+    }
+    int leftHeight = findHeight(root->left);
+    int rightHeight = findHeight(root->right);
+    return max(leftHeight, rightHeight) + 1; // Height of the tree
+}
+
 void clearTree(treeNode*& root) {
     if (root != nullptr) {
         clearTree(root->left);
