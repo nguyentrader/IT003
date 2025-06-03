@@ -55,7 +55,7 @@ void CreateTree(TREE& t) {
 }
 
 int Height(TREE t) {
-    if (t == NULL) return 0;
+    if (t == NULL) return -1;
     int leftHeight = Height(t->pLeft);
     int rightHeight = Height(t->pRight);
     return max(leftHeight, rightHeight) + 1;
