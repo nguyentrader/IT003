@@ -54,17 +54,19 @@ void CreateTree(TREE& t) {
     }
 }
 
-bool isSubtree(TREE S, TREE T) {
-    if (T == NULL) return true; // An empty tree is a subtree of any tree
-    if (S == NULL) return false; // Non-empty tree cannot be a subtree of an empty tree
+bool isSameTree(TREE a, TREE b) {
+    if (a == NULL && b == NULL) return true;
+    if (a == NULL || b == NULL) return false;
+    return (a->key == b->key) &&
+           isSameTree(a->pLeft, b->pLeft) &&
+           isSameTree(a->pRight, b->pRight);
+}
 
-    if (S->key == T->key) {
-        // Check if the current nodes match and then check their subtrees
-        return isSubtree(S->pLeft, T->pLeft) && isSubtree(S->pRight, T->pRight);
-    }
-    
-    // If not matching, check left and right subtrees of S
-    return isSubtree(S->pLeft, T) || isSubtree(S->pRight, T);
+bool isSubtree(TREE S, TREE T) {
+    if (S == NULL) return true;
+    if (T == NULL) return false;
+    if (isSameTree(T, S)) return true;
+    return isSubtree(S, T->pLeft) || isSubtree(S, T->pRight);
 }
 
 int main() {
@@ -88,4 +90,5 @@ int main() {
 //    \       /
 //     ))    .'
 //         //    /
+//         /
 //         /
